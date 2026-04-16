@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohan Singh – Financial Analyst</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0d1b2a;
+      --navy2:  #1b2d42;
+      --gold:   #c9a84c;
+      --gold2:  #e8c97a;
+      --white:  #f8f9fa;
+      --gray:   #6c757d;
+      --light:  #eef1f5;
+      --text:   #1a1a2e;
+      --radius: 8px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,27,42,0.96);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw;
+      height: 60px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.1rem; color: var(--gold);
+      letter-spacing: 0.04em; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75); text-decoration: none;
+      font-size: 0.875rem; letter-spacing: 0.03em; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold2); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #243b55 100%);
+      display: flex; align-items: center;
+      padding: 100px 6vw 60px;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr auto;
+      gap: 3rem; align-items: center; width: 100%; max-width: 1100px; margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold2);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800; color: #fff;
+      line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--gold); font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+    .hero-summary {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.975rem; max-width: 580px;
+      margin-bottom: 2rem;
+    }
+    .hero-contacts {
+      display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.4rem;
+    }
+    .hero-contacts a {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.65); text-decoration: none;
+      font-size: 0.875rem; transition: color 0.2s;
+    }
+    .hero-contacts a:hover { color: var(--gold2); }
+    .hero-contacts svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700; font-size: 0.875rem; letter-spacing: 0.04em;
+      padding: 12px 28px; border-radius: var(--radius);
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      flex-shrink: 0;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1.2rem 1.4rem; text-align: center;
+      min-width: 130px;
+    }
+    .stat-num {
+      font-size: 1.9rem; font-weight: 800; color: var(--gold);
+      display: block; line-height: 1;
+    }
+    .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 4px; letter-spacing: 0.04em; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 6vw; }
+    section:nth-child(odd) { background: #fff; }
+    section:nth-child(even) { background: var(--light); }
+
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; color: var(--navy); letter-spacing: -0.02em;
+    }
+    .section-line {
+      width: 40px; height: 3px; background: var(--gold);
+      margin: 0.8rem auto 0; border-radius: 2px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+    }
+    .about-text p { color: #444; font-size: 0.975rem; margin-bottom: 1rem; }
+    .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+    .highlight-item {
+      background: var(--light);
+      border-left: 3px solid var(--gold);
+      padding: 0.9rem 1rem; border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    .highlight-item strong { display: block; font-size: 0.8rem; color: var(--navy); font-weight: 700; margin-bottom: 2px; }
+    .highlight-item span { font-size: 0.78rem; color: var(--gray); }
+
+    /* ── TIMELINE (Experience) ── */
+    .timeline { position: relative; max-width: 900px; margin: 0 auto; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 22px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+    .tl-item { display: flex; gap: 2rem; margin-bottom: 2.8rem; position: relative; }
+    .tl-dot {
+      flex-shrink: 0; width: 46px; height: 46px;
+      background: var(--navy); border: 2px solid var(--gold);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+    }
+    .tl-dot svg { width: 18px; height: 18px; color: var(--gold); }
+    .tl-card {
+      flex: 1; background: #fff; border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.6rem 1.8rem;
+      border-top: 3px solid var(--gold); transition: transform 0.2s;
+    }
+    .tl-card:hover { transform: translateY(-2px); }
+    .tl-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.3rem; }
+    .tl-role { font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+    .tl-date {
+      font-size: 0.78rem; font-weight: 600; color: var(--gold);
+      background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+      padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+    }
+    .tl-org { font-size: 0.875rem; color: var(--gray); margin-bottom: 1rem; font-style: italic; }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li {
+      font-size: 0.875rem; color: #444; padding: 0.3rem 0 0.3rem 1.2rem; position: relative;
+    }
+    .tl-bullets li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--gold); font-size: 0.75rem;
+    }
+    .tl-kpis { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .kpi-badge {
+      font-size: 0.72rem; font-weight: 700;
+      background: var(--navy); color: var(--gold);
+      padding: 3px 10px; border-radius: 20px; letter-spacing: 0.02em;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .project-card {
+      background: #fff; border-radius: 12px; box-shadow: var(--shadow);
+      overflow: hidden; display: flex; flex-direction: column;
+      border: 1px solid #e2e8f0;
+      transition: transform 0.25s, box-shadow 0.25s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+    }
+    .project-card-header {
+      padding: 1.8rem 1.8rem 1.2rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      position: relative; overflow: hidden;
+    }
+    .project-card-header::after {
+      content: '';
+      position: absolute; right: -20px; top: -20px;
+      width: 100px; height: 100px;
+      background: rgba(201,168,76,0.08);
+      border-radius: 50%;
+    }
+    .project-icon {
+      width: 44px; height: 44px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .project-icon svg { width: 22px; height: 22px; color: var(--gold); }
+    .project-card-title {
+      font-size: 1.1rem; font-weight: 800; color: #fff;
+      margin-bottom: 0.3rem; line-height: 1.2;
+    }
+    .project-card-sub {
+      font-size: 0.78rem; color: rgba(255,255,255,0.5);
+      font-weight: 500; letter-spacing: 0.03em;
+    }
+    .project-card-body { padding: 1.4rem 1.8rem; flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+    .project-desc { font-size: 0.875rem; color: #555; line-height: 1.65; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .project-tag {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.03em;
+      background: rgba(13,27,42,0.06); color: var(--navy);
+      border: 1px solid rgba(13,27,42,0.12);
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .project-metrics {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .project-metric {
+      display: flex; flex-direction: column;
+    }
+    .project-metric-val {
+      font-size: 1.1rem; font-weight: 800; color: var(--navy);
+    }
+    .project-metric-label {
+      font-size: 0.68rem; color: var(--gray); font-weight: 500;
+    }
+    .project-card-footer {
+      padding: 1rem 1.8rem 1.6rem;
+      display: flex; gap: 0.7rem; flex-wrap: wrap;
+    }
+    .btn-dash {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--gold); color: var(--navy);
+      font-weight: 700; font-size: 0.8rem; letter-spacing: 0.03em;
+      padding: 9px 18px; border-radius: var(--radius);
+      text-decoration: none; transition: background 0.2s, transform 0.15s;
+      border: none; cursor: pointer;
+    }
+    .btn-dash:hover { background: var(--gold2); transform: translateY(-1px); }
+    .btn-dash svg { width: 14px; height: 14px; }
+    .btn-files {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: transparent; color: var(--navy);
+      font-weight: 600; font-size: 0.8rem; letter-spacing: 0.03em;
+      padding: 9px 18px; border-radius: var(--radius);
+      text-decoration: none; transition: all 0.2s;
+      border: 1.5px solid #d0d7e2; cursor: pointer;
+    }
+    .btn-files:hover {
+      background: var(--navy); color: var(--gold);
+      border-color: var(--navy);
+    }
+    .btn-files svg { width: 14px; height: 14px; }
+
+    /* ── MODAL ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(10,18,30,0.75);
+      backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 16px;
+      width: 100%; max-width: 780px;
+      max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+      animation: modalIn 0.25s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      padding: 2rem 2.2rem 1.6rem;
+      border-radius: 16px 16px 0 0;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 1.2rem; right: 1.4rem;
+      background: rgba(255,255,255,0.1); border: none; cursor: pointer;
+      color: rgba(255,255,255,0.7); width: 32px; height: 32px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; transition: background 0.2s, color 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .modal-title { font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 0.3rem; }
+    .modal-sub { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+    .modal-body { padding: 2rem 2.2rem; }
+    .modal-section { margin-bottom: 1.8rem; }
+    .modal-section-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.8rem; padding-bottom: 0.4rem;
+      border-bottom: 1px solid #e8ecf2;
+    }
+    .modal-desc { font-size: 0.9rem; color: #444; line-height: 1.7; }
+    .modal-highlights {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem;
+    }
+    .modal-highlight {
+      background: var(--light); border-radius: var(--radius);
+      padding: 0.8rem 1rem; text-align: center;
+      border-top: 2px solid var(--gold);
+    }
+    .modal-highlight-val { font-size: 1.15rem; font-weight: 800; color: var(--navy); }
+    .modal-highlight-label { font-size: 0.68rem; color: var(--gray); margin-top: 2px; }
+    .modal-live-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      color: var(--gold); font-weight: 700; font-size: 0.9rem;
+      padding: 14px 24px; border-radius: var(--radius);
+      text-decoration: none; transition: opacity 0.2s, transform 0.15s;
+      width: 100%; justify-content: center;
+      border: 1px solid rgba(201,168,76,0.3);
+      margin-bottom: 0.8rem;
+    }
+    .modal-live-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .modal-live-btn svg { width: 18px; height: 18px; }
+    .modal-live-note {
+      font-size: 0.75rem; color: var(--gray); text-align: center;
+      margin-bottom: 1.4rem;
+      padding: 8px 12px; background: #fffbea; border-radius: 6px;
+      border: 1px solid #f0e0a0;
+    }
+    .modal-files { display: flex; flex-direction: column; gap: 0.6rem; }
+    .modal-file-row {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--light); border-radius: var(--radius);
+      padding: 0.85rem 1.1rem;
+      border: 1px solid #e2e8f0;
+    }
+    .modal-file-info { display: flex; align-items: center; gap: 0.7rem; }
+    .modal-file-icon {
+      width: 34px; height: 34px;
+      background: #fff; border-radius: 6px;
+      border: 1px solid #d8e0eb;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .modal-file-icon svg { width: 16px; height: 16px; }
+    .icon-py { color: #3776AB; }
+    .icon-xl { color: #217346; }
+    .modal-file-name { font-size: 0.82rem; font-weight: 600; color: var(--navy); }
+    .modal-file-type { font-size: 0.7rem; color: var(--gray); }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      background: var(--navy); color: var(--gold);
+      font-size: 0.76rem; font-weight: 700; letter-spacing: 0.03em;
+      padding: 7px 14px; border-radius: 6px;
+      text-decoration: none; transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-download:hover { background: var(--navy2); }
+    .btn-download svg { width: 13px; height: 13px; }
+
+    /* ── EDUCATION ── */
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+    .edu-card {
+      background: #fff; border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 1.8rem; border-bottom: 3px solid var(--gold);
+    }
+    .edu-degree { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 0.3rem; }
+    .edu-school { font-size: 0.875rem; color: var(--gold); font-weight: 600; margin-bottom: 0.2rem; }
+    .edu-date { font-size: 0.78rem; color: var(--gray); margin-bottom: 0.9rem; }
+    .edu-notes { font-size: 0.8rem; color: #555; line-height: 1.6; }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 900px; margin: 0 auto; }
+    .skill-group { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.8rem; }
+    .skill-group-title {
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--navy); margin-bottom: 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--gold);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      font-size: 0.78rem; font-weight: 500;
+      background: var(--light); color: var(--navy);
+      border: 1px solid #d8dde6;
+      padding: 5px 12px; border-radius: 20px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .skill-tag:hover { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+    .skill-tag.tech {
+      background: rgba(13,27,42,0.05); border-color: rgba(13,27,42,0.2);
+    }
+    .skill-tag.tech:hover { background: var(--navy); color: var(--gold2); border-color: var(--navy); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center; font-size: 0.8rem;
+      padding: 2rem 6vw;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { color: var(--gold2); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); justify-self: stretch; }
+      .about-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .modal-highlights { grid-template-columns: repeat(2, 1fr); }
+      .tl-header { flex-direction: column; }
+      nav { padding: 0 4vw; }
+      .nav-links { gap: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .modal-highlights { grid-template-columns: 1fr 1fr; }
+      .modal-body { padding: 1.4rem; }
+      .modal-header { padding: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">RS</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="mailto:rohan.singh150596@gmail.com">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="hero-tag">Financial Analyst &amp; BI Strategist</span>
+      <h1 class="hero-name">Rohan Singh</h1>
+      <p class="hero-title">Finance &amp; Data Analytics | Toronto, ON</p>
+      <p class="hero-summary">
+        Financial analyst with 4+ years of experience in revenue budgeting, forecasting, and BI reporting across complex multi-stakeholder environments. MBA from McMaster's DeGroote School of Business, with deep expertise in Power BI, SQL, Excel, and Python.
+      </p>
+      <div class="hero-contacts">
+        <a href="tel:+16476249124">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +1 (647) 624-9124
+        </a>
+        <a href="mailto:rohan.singh150596@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          rohan.singh150596@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/rohsingh96" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/rohsingh96
+        </a>
+      </div>
+      <a href="#projects" class="btn-primary">View My Work</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-num" data-target="4">0</span><span class="stat-num" style="font-size:1.4rem">+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">$3B+</span>
+        <span class="stat-label">Portfolios Managed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">$2.7B</span>
+        <span class="stat-label">Inefficiencies Identified</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" data-target="25">0</span><span class="stat-num" style="font-size:1.4rem">%</span>
+        <span class="stat-label">Avg. Accuracy Gain</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Finance Meets Data Strategy</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a financial analyst who bridges the gap between complex data and executive decision-making. With an MBA from McMaster's DeGroote School of Business and hands-on experience across healthcare, government, and financial services, I specialize in turning raw financial data into clear, actionable insights.
+        </p>
+        <p>
+          My work spans revenue budgeting, variance analysis, KPI dashboard development, and self-serve BI reporting. Whether building Python scenario models for a $2.5M grant portfolio or engineering SAP reconciliations supporting a $3B government budget, I focus on accuracy, automation, and business impact.
+        </p>
+        <p>
+          I thrive in environments where analytical rigor and strategic storytelling intersect — supporting senior leadership with the clarity they need to make confident decisions.
+        </p>
+      </div>
+      <div>
+        <div class="about-highlights">
+          <div class="highlight-item">
+            <strong>MBA — McMaster</strong>
+            <span>DeGroote School of Business, 2024</span>
+          </div>
+          <div class="highlight-item">
+            <strong>BBA — Cincinnati</strong>
+            <span>Finance &amp; Marketing, 2018</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Power BI &amp; Tableau</strong>
+            <span>Dashboard &amp; BI Reporting</span>
+          </div>
+          <div class="highlight-item">
+            <strong>SQL &amp; Python</strong>
+            <span>Modeling &amp; Automation</span>
+          </div>
+          <div class="highlight-item">
+            <strong>SAP &amp; Oracle ERP</strong>
+            <span>Reconciliation &amp; Controls</span>
+          </div>
+          <div class="highlight-item">
+            <strong>Advanced Excel</strong>
+            <span>VBA, Macros, Pivot Tables</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Career</p>
+      <h2 class="section-title">Work Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="timeline">
+
+      <!-- WISH -->
+      <div class="tl-item">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <span class="tl-role">Finance Strategy Intern</span>
+            <span class="tl-date">Jul 2024 – Jan 2025</span>
+          </div>
+          <p class="tl-org">Wadhwani Initiative for Sustainable Healthcare (WISH) · Delhi, India · Remote</p>
+          <ul class="tl-bullets">
+            <li>Monitored financial performance for a $2.5M grant portfolio using SQL-integrated Power BI dashboards, tracking KPI variances, funding utilization, and revenue trends — improving reporting accuracy 15%.</li>
+            <li>Built Python-based scenario budgeting models for revenue forecasting and annual planning, reducing budget variance 28% while enabling $1.2M in approved commitments through financial statement and ratio analyses.</li>
+            <li>Designed KPI and productivity dashboards tracking service coverage, cost efficiency, and liquidity indicators to support performance monitoring, exception identification, and escalation management.</li>
+          </ul>
+          <div class="tl-kpis">
+            <span class="kpi-badge">+15% Reporting Accuracy</span>
+            <span class="kpi-badge">−28% Budget Variance</span>
+            <span class="kpi-badge">$1.2M Commitments Enabled</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ministry of AG -->
+      <div class="tl-item">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <span class="tl-role">Business Finance Associate Co-op</span>
+            <span class="tl-date">Jan 2023 – Apr 2023</span>
+          </div>
+          <p class="tl-org">Ministry of Attorney General (Corporate Office) · Toronto, Canada</p>
+          <ul class="tl-bullets">
+            <li>Developed Excel and cloud-based forecasting and variance models identifying $2.7B in inefficiencies within a $3B portfolio, supporting management decisions, capital allocation, and governance recommendations.</li>
+            <li>Engineered Oracle and SAP reconciliations using Excel macros and VBA, improving reporting accuracy 18% and supporting audit compliance and self-serve reporting across all departments.</li>
+            <li>Built Power BI and Tableau dashboards for revenue and budget tracking, variance analysis, and scenario modeling — enabling self-serve BI reporting and executive-level presentations.</li>
+          </ul>
+          <div class="tl-kpis">
+            <span class="kpi-badge">$2.7B Inefficiencies Found</span>
+            <span class="kpi-badge">+18% Reporting Accuracy</span>
+            <span class="kpi-badge">$3B Portfolio</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Genpact -->
+      <div class="tl-item">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <span class="tl-role">Associate — Senior Financial Risk Analyst</span>
+            <span class="tl-date">Nov 2019 – Jul 2022</span>
+          </div>
+          <p class="tl-org">Genpact India Pvt Ltd · Gurugram, India</p>
+          <ul class="tl-bullets">
+            <li>Reconciled and monitored $3B+ retail and wholesale portfolios using SAP and SQL, improving data accuracy 25%, increasing client ratings 35%, and capturing $180K revenue.</li>
+            <li>Implemented structured SAP and Power BI reporting workflows, improving analytic accuracy 25% and reducing turnaround by 1.5 days while delivering monthly revenue performance dashboards.</li>
+            <li>Produced financial models and analysis memos supporting authorization decisions, reducing approval cycles 15% and delivering $30K annual savings through cash flow, leverage, and risk assessment.</li>
+            <li>Developed SQL alerts and Excel automation to monitor covenant thresholds and credit exposure limits, reducing evaluation errors 4.5% and compliance timelines 15%.</li>
+          </ul>
+          <div class="tl-kpis">
+            <span class="kpi-badge">+25% Data Accuracy</span>
+            <span class="kpi-badge">+35% Client Ratings</span>
+            <span class="kpi-badge">$180K Revenue Captured</span>
+            <span class="kpi-badge">$30K Annual Savings</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enertrack -->
+      <div class="tl-item">
+        <div class="tl-dot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="tl-card">
+          <div class="tl-header">
+            <span class="tl-role">Financial Analyst</span>
+            <span class="tl-date">May 2019 – Oct 2019</span>
+          </div>
+          <p class="tl-org">Enertrack Analytics · New Delhi, India</p>
+          <ul class="tl-bullets">
+            <li>Built Excel-based valuation and stress-testing models supporting investment analysis, improving accuracy 25% through financial statement analyses, benchmarking, and downside recovery scenario evaluation.</li>
+            <li>Developed automated capital forecasting templates enabling portfolio-level variance tracking and supporting $2.5M in investment allocation decisions.</li>
+          </ul>
+          <div class="tl-kpis">
+            <span class="kpi-badge">+25% Model Accuracy</span>
+            <span class="kpi-badge">$2.5M Allocations Supported</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Work Samples</p>
+      <h2 class="section-title">Live Project Dashboards</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+
+      <!-- M&A Card -->
+      <div class="project-card" onclick="openModal('ma')">
+        <div class="project-card-header">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <p class="project-card-title">M&amp;A Deal Analysis Dashboard</p>
+          <p class="project-card-sub">Alphabet × Wiz · $32B Acquisition · Senior Analyst Model</p>
+        </div>
+        <div class="project-card-body">
+          <p class="project-desc">
+            Full-stack M&amp;A analysis of Alphabet's $32B acquisition of Wiz — covering DCF valuation, accretion/dilution, trading comps, deal synergies, and regulatory risk. Built as an interactive Plotly Dash app with scenario toggles and live financial model outputs.
+          </p>
+          <div class="project-metrics">
+            <div class="project-metric">
+              <span class="project-metric-val">$32B</span>
+              <span class="project-metric-label">Deal Size</span>
+            </div>
+            <div class="project-metric">
+              <span class="project-metric-val">64×</span>
+              <span class="project-metric-label">ARR Multiple</span>
+            </div>
+            <div class="project-metric">
+              <span class="project-metric-val">5-Yr DCF</span>
+              <span class="project-metric-label">Forecast Horizon</span>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Plotly Dash</span>
+            <span class="project-tag">DCF Valuation</span>
+            <span class="project-tag">M&amp;A Modeling</span>
+            <span class="project-tag">Excel</span>
+            <span class="project-tag">Accretion / Dilution</span>
+          </div>
+        </div>
+        <div class="project-card-footer">
+          <button class="btn-dash" onclick="event.stopPropagation(); window.open('https://m-and-a-analysis-dashboard.onrender.com','_blank')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+            Live Dashboard
+          </button>
+          <button class="btn-files" onclick="openModal('ma')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+            View Files
+          </button>
+        </div>
+      </div>
+
+      <!-- Credit Risk Card -->
+      <div class="project-card" onclick="openModal('credit')">
+        <div class="project-card-header">
+          <div class="project-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p class="project-card-title">Credit Risk Analysis Dashboard</p>
+          <p class="project-card-sub">Basel II / III Framework · 32,581 Loans · PD Scorecard</p>
+        </div>
+        <div class="project-card-body">
+          <p class="project-desc">
+            End-to-end credit risk platform analyzing a 32,581-loan consumer portfolio. Features PD scoring, WOE/IV analysis, Expected Loss calculations (PD × LGD × EAD), interactive stress testing, and a fully filterable loan explorer — built to CRO presentation standards.
+          </p>
+          <div class="project-metrics">
+            <div class="project-metric">
+              <span class="project-metric-val">32,581</span>
+              <span class="project-metric-label">Loans Analyzed</span>
+            </div>
+            <div class="project-metric">
+              <span class="project-metric-val">$30.7M</span>
+              <span class="project-metric-label">Expected Loss</span>
+            </div>
+            <div class="project-metric">
+              <span class="project-metric-val">5 Tabs</span>
+              <span class="project-metric-label">Dashboard Views</span>
+            </div>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Plotly Dash</span>
+            <span class="project-tag">Basel II/III</span>
+            <span class="project-tag">Risk Analytics</span>
+            <span class="project-tag">Excel</span>
+            <span class="project-tag">PD Scorecard</span>
+          </div>
+        </div>
+        <div class="project-card-footer">
+          <button class="btn-dash" onclick="event.stopPropagation(); window.open('https://credit-risk-analysis-dashboard-1lcv.onrender.com','_blank')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+            Live Dashboard
+          </button>
+          <button class="btn-files" onclick="openModal('credit')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+            View Files
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Academic Background</p>
+      <h2 class="section-title">Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <p class="edu-degree">Master of Business Administration</p>
+        <p style="font-size:0.8rem;color:#555;margin-bottom:4px;">Finance &amp; Strategic Business Valuations</p>
+        <p class="edu-school">DeGroote School of Business, McMaster University</p>
+        <p class="edu-date">Burlington, Canada &nbsp;·&nbsp; Aug 2022 – Jun 2024</p>
+        <p class="edu-notes">
+          Entrance Scholarship Recipient &nbsp;·&nbsp; Sponsorship Director — raised $10K for DeGroote Interschool Case Competition &nbsp;·&nbsp; The Marquee Group Certificates: Building a Financial Model, Capital Markets &nbsp;·&nbsp; Corporate Finance Foundations &nbsp;·&nbsp; Career Essentials in Cybersecurity (Microsoft &amp; LinkedIn)
+        </p>
+      </div>
+      <div class="edu-card">
+        <p class="edu-degree">Bachelor of Business Administration</p>
+        <p style="font-size:0.8rem;color:#555;margin-bottom:4px;">Finance &amp; Marketing</p>
+        <p class="edu-school">Carl H. Lindner College of Business, University of Cincinnati</p>
+        <p class="edu-date">USA &nbsp;·&nbsp; Aug 2014 – Dec 2018</p>
+        <p class="edu-notes">
+          Global Student 100% Scholarship Recipient &nbsp;·&nbsp; Executive Director: American Marketing Association &nbsp;·&nbsp; Ranked Top 10 out of 1,000+ students at the university's IQ-Elevator Pitch competition for 2 consecutive years
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Capabilities</p>
+      <h2 class="section-title">Core Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="skill-group-title">Finance Skills</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Revenue Budgeting &amp; Forecasting</span>
+          <span class="skill-tag">Annual Business Planning</span>
+          <span class="skill-tag">Rate &amp; Productivity Analysis</span>
+          <span class="skill-tag">Financial Statement &amp; Ratio Analysis</span>
+          <span class="skill-tag">Variance Analysis &amp; Scenario Modeling</span>
+          <span class="skill-tag">KPI Reporting &amp; Performance Monitoring</span>
+          <span class="skill-tag">Executive-Level Presentations</span>
+          <span class="skill-tag">External Benchmarking</span>
+          <span class="skill-tag">Ad Hoc &amp; Recurring Reporting</span>
+          <span class="skill-tag">Process Improvement &amp; Automation</span>
+          <span class="skill-tag">Audit Compliance &amp; Controls</span>
+          <span class="skill-tag">Cash Flow &amp; Leverage Analysis</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <p class="skill-group-title">Technical Skills</p>
+        <div class="skill-tags">
+          <span class="skill-tag tech">Advanced Excel (Macros, VBA, Pivot Tables)</span>
+          <span class="skill-tag tech">Power BI</span>
+          <span class="skill-tag tech">SQL</span>
+          <span class="skill-tag tech">Tableau</span>
+          <span class="skill-tag tech">Python</span>
+          <span class="skill-tag tech">SAP</span>
+          <span class="skill-tag tech">Oracle ERP</span>
+          <span class="skill-tag tech">Dashboard Development</span>
+          <span class="skill-tag tech">Self-Serve BI Reporting</span>
+          <span class="skill-tag tech">Financial Modeling</span>
+          <span class="skill-tag tech">Data Validation &amp; Reconciliation</span>
+          <span class="skill-tag tech">Document Management</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    &copy; 2025 Rohan Singh &nbsp;·&nbsp;
+    <a href="mailto:rohan.singh150596@gmail.com">rohan.singh150596@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://linkedin.com/in/rohsingh96" target="_blank" rel="noopener">LinkedIn</a>
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     M&A MODAL
+════════════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="modal-ma" onclick="closeModalOnBackdrop(event, 'modal-ma')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('modal-ma')" aria-label="Close">✕</button>
+      <p class="modal-title">M&amp;A Deal Analysis — Alphabet × Wiz</p>
+      <p class="modal-sub">$32B Acquisition · Senior Analyst Dashboard · Python / Plotly Dash</p>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <p class="modal-section-title">Overview</p>
+        <p class="modal-desc">
+          A comprehensive M&amp;A analysis of Alphabet's $32B acquisition of Wiz (closed March 2026), built as a fully interactive senior analyst dashboard. The model covers five-year DCF valuation, accretion/dilution impact on Alphabet EPS, trading and transaction comparable multiples, deal synergy waterfalls, and regulatory/integration risk assessment — sourced from Alphabet 10-K filings (FY2020–FY2024), SEC EDGAR, and industry data.
+        </p>
+      </div>
+
+      <div class="modal-section">
+        <p class="modal-section-title">Key Deal Metrics</p>
+        <div class="modal-highlights">
+          <div class="modal-highlight">
+            <p class="modal-highlight-val">$32B</p>
+            <p class="modal-highlight-label">Total Deal Value</p>
+          </div>
+          <div class="modal-highlight">
+            <p class="modal-highlight-val">64×</p>
+            <p class="modal-highlight-label">Price / ARR Multiple</p>
+          </div>
+          <div class="modal-highlight">
+            <p class="modal-highlight-val">2.67×</p>
+            <p class="modal-highlight-label">Premium over Series E</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <p class="modal-section-title">Live Dashboard</p>
+        <a href="https://m-and-a-analysis-dashboard.onrender.com" target="_blank" rel="noopener" class="modal-live-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          Open Live Dashboard
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;width:14px;height:14px;opacity:0.6"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <p class="modal-live-note">
+          Hosted on Render · Free tier may take ~30 sec to wake up on first load
+        </p>
+      </div>
+
+      <div class="modal-section">
+        <p class="modal-section-title">Download Project Files</p>
+        <div class="modal-files">
+          <div class="modal-file-row">
+            <div class="modal-file-info">
+              <div class="modal-file-icon">
+                <svg class="icon-py" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+              </div>
+              <div>
+                <p class="modal-file-name">M_&amp;_A_Work_Sample.py</p>
+                <p class="modal-file-type">Python · Plotly Dash Application</p>
+              </div>
+            </div>
+            <a href="M_%26_A_Work_Sample.py" download class="btn-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </div>
+          <div class="modal-file-row">
+            <div class="modal-file-info">
+              <div class="modal-file-icon">
+                <svg class="icon-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+              </div>
+              <div>
+                <p class="modal-file-name">ma_model.xlsx</p>
+                <p class="modal-file-type">Excel · Financial Model &amp; Data</p>
+              </div>
+            </div>
+            <a href="ma_model.xlsx" download class="btn-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     CREDIT RISK MODAL
+════════════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="modal-credit" onclick="closeModalOnBackdrop(event, 'modal-credit')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal('modal-credit')" aria-label="Close">✕</button>
+      <p class="modal-title">Credit Risk Analysis Dashboard</p>
+      <p class="modal-sub">Basel II / III Framework · 32,581 Loans · Python / Plotly Dash</p>
+    </div>
+    <div class="modal-body">
+
+      <div class="modal-section">
+        <p class="modal-section-title">Overview</p>
+        <p class="modal-desc">
+          A CRO-level credit risk platform built on a 32,581-loan consumer dataset. The dashboard implements Basel II/III methodology — computing PD scores by loan grade, LGD (45% unsecured), and EAD to derive Expected Loss at portfolio and segment level. Features include a WOE/IV PD scorecard, interactive stress testing (PD multiplier, LGD, EAD growth), and a fully filterable loan explorer with drill-down to individual records.
+        </p>
+      </div>
+
+      <div class="modal-section">
+        <p class="modal-section-title">Portfolio Highlights</p>
+        <div class="modal-highlights">
+          <div class="modal-highlight">
+            <p class="modal-highlight-val">32,581</p>
+            <p class="modal-highlight-label">Loans Analyzed</p>
+          </div>
+          <div class="modal-highlight">
+            <p class="modal-highlight-val">$30.7M</p>
+            <p class="modal-highlight-label">Base Expected Loss</p>
+          </div>
+          <div class="modal-highlight">
+            <p class="modal-highlight-val">~$76M</p>
+            <p class="modal-highlight-label">EL under 2.5× Stress</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <p class="modal-section-title">Live Dashboard</p>
+        <a href="https://credit-risk-analysis-dashboard-1lcv.onrender.com" target="_blank" rel="noopener" class="modal-live-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          Open Live Dashboard
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left:auto;width:14px;height:14px;opacity:0.6"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+        <p class="modal-live-note">
+          Hosted on Render · Free tier may take ~30 sec to wake up on first load
+        </p>
+      </div>
+
+      <div class="modal-section">
+        <p class="modal-section-title">Download Project Files</p>
+        <div class="modal-files">
+          <div class="modal-file-row">
+            <div class="modal-file-info">
+              <div class="modal-file-icon">
+                <svg class="icon-py" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+              </div>
+              <div>
+                <p class="modal-file-name">credit_risk_dashboard.py</p>
+                <p class="modal-file-type">Python · Plotly Dash Application</p>
+              </div>
+            </div>
+            <a href="credit_risk_dashboard.py" download class="btn-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </div>
+          <div class="modal-file-row">
+            <div class="modal-file-info">
+              <div class="modal-file-icon">
+                <svg class="icon-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+              </div>
+              <div>
+                <p class="modal-file-name">credit_risk_model.xlsx</p>
+                <p class="modal-file-type">Excel · Risk Model &amp; Data</p>
+              </div>
+            </div>
+            <a href="credit_risk_model.xlsx" download class="btn-download">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── MODAL CONTROLS ──────────────────────────────────────────────────────────
+  function openModal(key) {
+    document.getElementById('modal-' + key).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOnBackdrop(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-backdrop.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  // ── ANIMATE COUNTERS ────────────────────────────────────────────────────────
+  function animateCounters() {
+    document.querySelectorAll('[data-target]').forEach(el => {
+      const target = +el.dataset.target;
+      const duration = 1200;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current);
+        if (current >= target) clearInterval(timer);
+      }, 16);
+      delete el.dataset.target;
+    });
+  }
+
+  const heroObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounters(); heroObserver.disconnect(); } });
+  }, { threshold: 0.3 });
+  heroObserver.observe(document.getElementById('hero'));
+
+  // ── FADE-IN CARDS ON SCROLL ─────────────────────────────────────────────────
+  const cards = document.querySelectorAll('.tl-card, .edu-card, .skill-group, .highlight-item, .project-card');
+  cards.forEach(c => {
+    c.style.opacity = '0';
+    c.style.transform = 'translateY(20px)';
+    c.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  });
+
+  const cardObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const idx = Array.from(cards).indexOf(e.target);
+        setTimeout(() => {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }, 60 * (idx % 4));
+        cardObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(c => cardObserver.observe(c));
+</script>
+</body>
+</html>
