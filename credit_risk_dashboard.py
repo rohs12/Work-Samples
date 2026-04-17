@@ -234,6 +234,7 @@ iv_summary["IV Fmt"]   = iv_summary["Total IV"].apply(lambda x: f"{x:.3f}")
 # ═══════════════════════════════════════════════════════════════════════════════
 app = dash.Dash(__name__, title="Credit Risk Dashboard")
 app.config.suppress_callback_exceptions = True
+server = app.server
 
 TAB_STYLE = {
     "font-family": FONT, "font-size": "13px", "font-weight": "600",
